@@ -272,7 +272,10 @@ impl<'data> Builder<'data> {
                 elf::SHT_GNU_VERNEED => SectionData::GnuVerneed,
                 other => match (builder.header.e_machine, other) {
                     (elf::EM_ARM, elf::SHT_ARM_ATTRIBUTES)
-                    | (elf::EM_AARCH64, elf::SHT_AARCH64_ATTRIBUTES) => {
+                    | (elf::EM_AARCH64, elf::SHT_AARCH64_ATTRIBUTES)
+                    | (elf::EM_CSKY, elf::SHT_CSKY_ATTRIBUTES)
+                    | (elf::EM_DELENDUM, elf::SHT_DELENDUM_ATTRIBUTES)
+                    | (elf::EM_RISCV, elf::SHT_RISCV_ATTRIBUTES) => {
                         let attributes = section.attributes(endian, data)?;
                         Self::read_attributes(index, attributes, sections.len(), symbols.len())?
                     }
