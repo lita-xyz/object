@@ -574,6 +574,8 @@ pub const EM_RISCV: u16 = 243;
 pub const EM_BPF: u16 = 247;
 /// C-SKY
 pub const EM_CSKY: u16 = 252;
+/// Delendum
+pub const EM_DELENDUM: u16 = 999;
 /// Loongson LoongArch
 pub const EM_LOONGARCH: u16 = 258;
 /// Solana Binary Format
@@ -4640,6 +4642,38 @@ pub const EF_CSKY_ABIV2: u32 = 0x2000_0000;
 // C-SKY values for `SectionHeader*::sh_type`.
 /// C-SKY attributes section.
 pub const SHT_CSKY_ATTRIBUTES: u32 = SHT_LOPROC + 1;
+
+// Delendum
+/// no reloc
+pub const R_DELENDUM_NONE: u32 = 0;
+/// 32 bit abs
+pub const R_DELENDUM_ABS32: u32 = 1;
+/// 32-bit reloc
+pub const R_DELENDUM_REL32: u32 = 2;
+/// copy
+pub const R_DELENDUM_COPY: u32 = 3;
+/// plt
+pub const R_DELENDUM_PLT: u32 = 4;
+/// irel32
+pub const R_DELENDUM_IREL32: u32 = 6;
+/// symbolic
+pub const R_DELENDUM_SYMBOLIC: u32 = 7;
+/// tls mod index
+pub const R_DELENDUM_TLS_MOD_INDEX: u32 = 8;
+/// tls offset
+pub const R_DELENDUM_TLS_OFFSET: u32 = 9;
+/// tls got
+pub const R_DELENDUM_TLS_GOT: u32 = 10;
+/// got
+pub const R_DELENDUM_GOT: u32 = 11;
+/// 32-bit abs
+pub const R_DELENDUM_ABS32_IMM: u32 = 12;
+
+pub const EF_DELENDUM: u32 = 0x2000000;
+
+// Delendum values for `SectionHeader*::sh_type`.
+/// Delendum attributes section.
+pub const SHT_DELENDUM_ATTRIBUTES: u32 = SHT_LOPROC + 1;
 
 // IA-64 specific declarations.
 
