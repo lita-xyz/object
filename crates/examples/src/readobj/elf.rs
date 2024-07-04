@@ -69,6 +69,7 @@ fn print_file_header<Elf: FileHeader>(p: &mut Printer<'_>, endian: Elf::Endian, 
                 p.flags(flags, EF_ARM_EABIMASK, FLAGS_EF_ARM_EABI);
             }
             EM_CSKY => p.flags(flags, EF_CSKY_ABIMASK, FLAGS_EF_CSKY_ABI),
+            EM_DELENDUM => p.flags(flags, 0, FLAGS_EF_DELENDUM),
             EM_IA_64 => p.flags(flags, 0, FLAGS_EF_IA_64),
             EM_SH => p.flags(flags, EF_SH_MACH_MASK, FLAGS_EF_SH_MACH),
             EM_S390 => p.flags(flags, 0, FLAGS_EF_S390),
@@ -236,6 +237,7 @@ fn print_section_headers<Elf: FileHeader>(
                 EM_ALPHA => FLAGS_SHT_ALPHA,
                 EM_ARM => FLAGS_SHT_ARM,
                 EM_CSKY => FLAGS_SHT_CSKY,
+                EM_DELENDUM => FLAGS_SHT_DELENDUM,
                 EM_IA_64 => FLAGS_SHT_IA_64,
                 EM_X86_64 => FLAGS_SHT_X86_64,
                 _ => &[],
@@ -472,6 +474,7 @@ fn rel_flag_type<Elf: FileHeader>(endian: Elf::Endian, elf: &Elf) -> &'static [F
         EM_AARCH64 => FLAGS_R_AARCH64,
         EM_ARM => FLAGS_R_ARM,
         EM_CSKY => FLAGS_R_CKCORE,
+        EM_DELENDUM => FLAGS_R_DELENDUM,
         EM_IA_64 => FLAGS_R_IA64,
         EM_SH => FLAGS_R_SH,
         EM_S390 => FLAGS_R_390,
@@ -1096,6 +1099,7 @@ const FLAGS_EM: &[Flag<u16>] = &flags!(
     EM_BPF,
     EM_SBF,
     EM_CSKY,
+    EM_DELENDUM,
     EM_ALPHA,
     EM_LOONGARCH,
 );
@@ -1178,6 +1182,7 @@ const FLAGS_EF_ARM_EABI: &[Flag<u32>] = &flags!(
     EF_ARM_EABI_VER5,
 );
 const FLAGS_EF_CSKY_ABI: &[Flag<u32>] = &flags!(EF_CSKY_ABIV1, EF_CSKY_ABIV2);
+const FLAGS_EF_DELENDUM: &[Flag<u32>] = &flags!(EF_DELENDUM);
 const FLAGS_EF_IA_64: &[Flag<u32>] = &flags!(EF_IA_64_ABI64);
 const FLAGS_EF_SH_MACH: &[Flag<u32>] = &flags!(
     EF_SH_UNKNOWN,
@@ -1345,6 +1350,7 @@ const FLAGS_SHT_PARISC: &[Flag<u32>] = &flags!(SHT_PARISC_EXT, SHT_PARISC_UNWIND
 const FLAGS_SHT_ALPHA: &[Flag<u32>] = &flags!(SHT_ALPHA_DEBUG, SHT_ALPHA_REGINFO);
 const FLAGS_SHT_ARM: &[Flag<u32>] = &flags!(SHT_ARM_EXIDX, SHT_ARM_PREEMPTMAP, SHT_ARM_ATTRIBUTES);
 const FLAGS_SHT_CSKY: &[Flag<u32>] = &flags!(SHT_CSKY_ATTRIBUTES);
+const FLAGS_SHT_DELENDUM: &[Flag<u32>] = &flags!(SHT_DELENDUM_ATTRIBUTES);
 const FLAGS_SHT_IA_64: &[Flag<u32>] = &flags!(SHT_IA_64_EXT, SHT_IA_64_UNWIND);
 const FLAGS_SHT_X86_64: &[Flag<u32>] = &flags!(SHT_X86_64_UNWIND);
 const FLAGS_SHF: &[Flag<u32>] = &flags!(
@@ -2322,6 +2328,20 @@ const FLAGS_R_CKCORE: &[Flag<u32>] = &flags!(
     R_CKCORE_TLS_DTPMOD32,
     R_CKCORE_TLS_DTPOFF32,
     R_CKCORE_TLS_TPOFF32,
+);
+const FLAGS_R_DELENDUM: &[Flag<u32>] = &flags!(
+    R_DELENDUM_NONE,
+    R_DELENDUM_ABS32,
+    R_DELENDUM_REL32,
+    R_DELENDUM_COPY,
+    R_DELENDUM_PLT,
+    R_DELENDUM_IREL32,
+    R_DELENDUM_SYMBOLIC,
+    R_DELENDUM_TLS_MOD_INDEX,
+    R_DELENDUM_TLS_OFFSET,
+    R_DELENDUM_TLS_GOT,
+    R_DELENDUM_GOT,
+    R_DELENDUM_ABS32_IMM,
 );
 const FLAGS_R_IA64: &[Flag<u32>] = &flags!(
     R_IA64_NONE,
