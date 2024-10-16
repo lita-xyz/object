@@ -4531,10 +4531,10 @@ pub const EF_CSKY_ABIV2: u32 = 0x2000_0000;
 /// C-SKY attributes section.
 pub const SHT_CSKY_ATTRIBUTES: u32 = SHT_LOPROC + 1;
 
-// Delendum
+// Delendum, as in llvm-valida/llvm/include/llvm/BinaryFormat/ELFRelocs/Delendum.def
 /// no reloc
 pub const R_DELENDUM_NONE: u32 = 0;
-/// 32 bit abs
+/// 32 bit abs in little endian
 pub const R_DELENDUM_ABS32: u32 = 1;
 /// 32-bit reloc
 pub const R_DELENDUM_REL32: u32 = 2;
@@ -4543,19 +4543,19 @@ pub const R_DELENDUM_COPY: u32 = 3;
 /// plt
 pub const R_DELENDUM_PLT: u32 = 4;
 /// irel32
-pub const R_DELENDUM_IREL32: u32 = 6;
+pub const R_DELENDUM_IREL32: u32 = 5;
 /// symbolic
-pub const R_DELENDUM_SYMBOLIC: u32 = 7;
+pub const R_DELENDUM_SYMBOLIC: u32 = 6;
 /// tls mod index
-pub const R_DELENDUM_TLS_MOD_INDEX: u32 = 8;
+pub const R_DELENDUM_TLS_MOD_INDEX: u32 = 7;
 /// tls offset
-pub const R_DELENDUM_TLS_OFFSET: u32 = 9;
+pub const R_DELENDUM_TLS_OFFSET: u32 = 8;
 /// tls got
-pub const R_DELENDUM_TLS_GOT: u32 = 10;
+pub const R_DELENDUM_TLS_GOT: u32 = 9;
 /// got
-pub const R_DELENDUM_GOT: u32 = 11;
-/// 32-bit abs
-pub const R_DELENDUM_ABS32_IMM: u32 = 12;
+pub const R_DELENDUM_GOT: u32 = 10;
+/// imm32 rel
+pub const R_DELENDUM_ABS32_IMM: u32 = 11;
 
 pub const EF_DELENDUM: u32 = 0x2000000;
 
