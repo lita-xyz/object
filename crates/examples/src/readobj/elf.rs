@@ -71,6 +71,7 @@ fn print_file_header<Elf: FileHeader>(p: &mut Printer<'_>, endian: Elf::Endian, 
                 p.flags(flags, EF_ARM_EABIMASK, FLAGS_EF_ARM_EABI);
             }
             EM_CSKY => p.flags(flags, EF_CSKY_ABIMASK, FLAGS_EF_CSKY_ABI),
+            EM_VALIDA => p.flags(flags, 0, FLAGS_EF_VALIDA),
             EM_IA_64 => p.flags(flags, 0, FLAGS_EF_IA_64),
             EM_SH => p.flags(flags, EF_SH_MACH_MASK, FLAGS_EF_SH_MACH),
             EM_S390 => p.flags(flags, 0, FLAGS_EF_S390),
@@ -269,6 +270,7 @@ fn print_section_headers<Elf: FileHeader>(
                 EM_ALPHA => FLAGS_SHT_ALPHA,
                 EM_ARM => FLAGS_SHT_ARM,
                 EM_CSKY => FLAGS_SHT_CSKY,
+                EM_VALIDA => FLAGS_SHT_VALIDA,
                 EM_IA_64 => FLAGS_SHT_IA_64,
                 EM_X86_64 => FLAGS_SHT_X86_64,
                 _ => &[],
@@ -539,6 +541,7 @@ fn rel_flag_type<Elf: FileHeader>(endian: Elf::Endian, elf: &Elf) -> &'static [F
         EM_AARCH64 => FLAGS_R_AARCH64,
         EM_ARM => FLAGS_R_ARM,
         EM_CSKY => FLAGS_R_CKCORE,
+        EM_VALIDA => FLAGS_R_VALIDA,
         EM_IA_64 => FLAGS_R_IA64,
         EM_SH => FLAGS_R_SH,
         EM_S390 => FLAGS_R_390,
@@ -1180,6 +1183,7 @@ const FLAGS_EM: &[Flag<u16>] = &flags!(
     EM_BPF,
     EM_SBF,
     EM_CSKY,
+    EM_VALIDA,
     EM_ALPHA,
     EM_LOONGARCH,
 );
@@ -1262,6 +1266,7 @@ const FLAGS_EF_ARM_EABI: &[Flag<u32>] = &flags!(
     EF_ARM_EABI_VER5,
 );
 const FLAGS_EF_CSKY_ABI: &[Flag<u32>] = &flags!(EF_CSKY_ABIV1, EF_CSKY_ABIV2);
+const FLAGS_EF_VALIDA: &[Flag<u32>] = &flags!(EF_VALIDA);
 const FLAGS_EF_IA_64: &[Flag<u32>] = &flags!(EF_IA_64_ABI64);
 const FLAGS_EF_SH_MACH: &[Flag<u32>] = &flags!(
     EF_SH_UNKNOWN,
@@ -1429,6 +1434,7 @@ const FLAGS_SHT_PARISC: &[Flag<u32>] = &flags!(SHT_PARISC_EXT, SHT_PARISC_UNWIND
 const FLAGS_SHT_ALPHA: &[Flag<u32>] = &flags!(SHT_ALPHA_DEBUG, SHT_ALPHA_REGINFO);
 const FLAGS_SHT_ARM: &[Flag<u32>] = &flags!(SHT_ARM_EXIDX, SHT_ARM_PREEMPTMAP, SHT_ARM_ATTRIBUTES);
 const FLAGS_SHT_CSKY: &[Flag<u32>] = &flags!(SHT_CSKY_ATTRIBUTES);
+const FLAGS_SHT_VALIDA: &[Flag<u32>] = &flags!(SHT_VALIDA_ATTRIBUTES);
 const FLAGS_SHT_IA_64: &[Flag<u32>] = &flags!(SHT_IA_64_EXT, SHT_IA_64_UNWIND);
 const FLAGS_SHT_X86_64: &[Flag<u32>] = &flags!(SHT_X86_64_UNWIND);
 const FLAGS_SHF: &[Flag<u32>] = &flags!(
@@ -2407,6 +2413,20 @@ const FLAGS_R_CKCORE: &[Flag<u32>] = &flags!(
     R_CKCORE_TLS_DTPOFF32,
     R_CKCORE_TLS_TPOFF32,
 );
+const FLAGS_R_VALIDA: &[Flag<u32>] = &flags!(
+        R_VALIDA_NONE,
+        R_VALIDA_ABS32,
+        R_VALIDA_REL32,
+        R_VALIDA_COPY,
+        R_VALIDA_PLT,
+        R_VALIDA_IREL32,
+        R_VALIDA_SYMBOLIC,
+        R_VALIDA_TLS_MOD_INDEX,
+        R_VALIDA_TLS_OFFSET,
+        R_VALIDA_TLS_GOT,
+        R_VALIDA_GOT,
+        R_VALIDA_ABS32_IMM,
+    );
 const FLAGS_R_IA64: &[Flag<u32>] = &flags!(
     R_IA64_NONE,
     R_IA64_IMM14,
